@@ -19,9 +19,9 @@ List通过下列几个骤来完成扩容：
 
 1. 确定新数组的长度L(如何确新数组长度：如果当前长度为0，新数组的长度为4，否则新数组的长度等于当前长度的2倍);  
 2. 声明一个长度为L的新数组;   
-3. 调用Array.Copy方法将原数组的元素复制到新声明的数组。
+3. 调用Array.Copy方法将原数组的元素复制到新声明的数组。    
 
-List提供了Indexer(索引索器)，可以像组一样通过下标来访问元素。 
+支持下标访问。 List提供了Indexer(索引索器)，可以像组一样通过下标来访问元素。 
 ```C#
     //数组可以通过下标访问元素
     var intArray=new int[](1,2,3,4,5);
@@ -31,8 +31,10 @@ List提供了Indexer(索引索器)，可以像组一样通过下标来访问元�
     var intList=new List<int>(){1,2,3,4,5};
     var lastItemInList=intList[4];
 ```
+可以添加重复元素。
 
 > System.Collections命名空间提供一个ArrayList的集合，该集合是在List泛型集合出来以前使用的，是非泛型的List集合。现代的代码建议使用List而不是ArrayList。  
 
 **HashSet**   
-HashSet也是一个泛型集合，也提供Add方法动态添加元素。
+HashSet也是一个泛型集合，也提供Add方法动态添加元素。HashSet内部主要使用一个int数组(m_buckets)、嵌套类Slot和Slot数组(m_slots)来实现。   
+HashSet的基本实现原理:
