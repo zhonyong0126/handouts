@@ -49,5 +49,6 @@ NextPms站点CPU利用率长时间保持在100%
 1. 查看w3wp(2).dmp文件的104号线程, 确定当前的stack还在是HashSet.Contains方法中.
 1. 查看所有线程, 发现有很多线程都是执行HashSet.Contains方法.
 1. 通过查看源代码, 发现一个HashSet类型的变量是静态的, 但在操作时并保证线程安全.
+
 ### 结论
-多线程环境中, 对HashSet的非线程安全操作容易导致死循环, 从而造成CPU利用率高.
+多线程环境中, 对HashSet的非线程安全操作容易导致死循环, 从而造成CPU利用率高.参考[High CPU in .NET app using a static Generic.Dictionary](https://blogs.msdn.microsoft.com/tess/2009/12/21/high-cpu-in-net-app-using-a-static-generic-dictionary)
