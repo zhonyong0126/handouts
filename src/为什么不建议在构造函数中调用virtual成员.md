@@ -57,9 +57,9 @@
 1. 在VS中打开Msiler（一款VS的插件，文章后面有介绍），并编译上面的代码。
 2. 在Msiler窗口中找到SubClass的构造函数对应的IL代码。如下图:   
 ![SubClass.ctor](http://7xk5iv.com1.z0.glb.clouddn.com/cnblogs-001-1.png)   
-在上图中，我们可以清晰的看到。在SubClass的构造函数中，首先执行“call     System.Void ConsoleApplication3.BaseClass::.ctor()”,然后执行“newobj   System.Void System.Collections.Generic.List`1<System.String>::.ctor()”。    
-BaseClass::.ctor()正是BaseClass的构造函数，在BaseClass的构造函数调用了Initialize方法，而这时调用是在SubClass中实现的Initialize方法，此时_items=new List<string>()代码还没有被执行。
-导致了SubClass.Initialize方法在_items=new List<string>()代码之前被执行了，这也正是为上面的代码会抛出NullReferenceException的原因。
+在上图中，我们可以清晰的看到。在SubClass的构造函数中，首先执行“call     System.Void ConsoleApplication3.BaseClass::.ctor()”,然后执行“newobj   System.Void System.Collections.Generic.List`1&lt;System.String&gt;::.ctor()”。    
+BaseClass::.ctor()正是BaseClass的构造函数，在BaseClass的构造函数调用了Initialize方法，而这时调用是在SubClass中实现的Initialize方法，此时_items=new List&lt;string&gt;()代码还没有被执行。
+导致了SubClass.Initialize方法在_items=new List&lt;string&gt;()代码之前被执行了，这也正是为什么上面的代码会抛出NullReferenceException的原因。
 
 总结
 =======
@@ -69,4 +69,3 @@ BaseClass::.ctor()正是BaseClass的构造函数，在BaseClass的构造函数�
 ==============
 Msiler插件可以在VS中直接查看某段代码生成的IL代码，而不需要额外通过ILSpy之类的工具打开再查看，比较方便。目前支持Visual Studio 2012, 2013, 2015。
 可以在VS的Extension中找到，也可以点击链接直接下载[https://marketplace.visualstudio.com/items?itemName=segrived.Msiler](https://marketplace.visualstudio.com/items?itemName=segrived.Msiler)
-
